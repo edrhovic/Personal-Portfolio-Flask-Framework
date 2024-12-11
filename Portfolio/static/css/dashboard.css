@@ -75,10 +75,6 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.about-myself-container h1:hover {
-    color: #aa92c7;
-    transform: scale(1.05);
-}
 
 .about-myself-container p {
     margin: 1rem 0;
@@ -92,10 +88,6 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.about-myself-container p:hover {
-    color: #f9f4f5;
-    text-decoration: underline;
-}
 
 .welcome-text span {
     color: #aa92c7;

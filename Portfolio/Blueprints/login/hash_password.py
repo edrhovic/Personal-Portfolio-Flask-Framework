@@ -43,23 +43,6 @@ values = (
     hashed_password
 )
 
-try:
-    cursor.execute(query, values)
-    db.commit()
-    print(f"User {user['firstname']} {user['lastname']} added successfully!")
-except mysql.connector.Error as err:
-    print(f"Error: {err}")
-finally:
-    cursor.close()
-    db.close()
+cursor.close()
+db.close()
 
-
-print(f"User retrieved: {user}")
-print(f"Stored password (hashed): {hashed_password}")
-
-
-password_input = '041405EdRhovic'  
-if check_password_hash(hashed_password, password_input):
-    print("Password matches!")
-else:
-    print("Password does not match.")

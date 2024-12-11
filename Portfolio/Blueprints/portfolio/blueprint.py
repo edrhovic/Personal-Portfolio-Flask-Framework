@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, session, reques
 import mysql.connector
 from werkzeug.security import check_password_hash
 from validation.validation import validate_user_data
+from Portfolio.Blueprints.login.hash_password import hashed_password
+
 
 blueprint = Blueprint('blueprint', __name__, template_folder='templates')
 
@@ -129,7 +131,7 @@ def delete_profile():
         cursor.execute("SELECT * FROM my_tb WHERE username=%s", (username,))
         usr = cursor.fetchone()
 
-        if usr and check_password_hash(usr[9], password):
+        if usr and check_password_hash(hashed_password, password):
             conn.commit()
             session.clear()
             flash('Your profile has been deleted successfully!', 'success')

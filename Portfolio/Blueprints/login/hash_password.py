@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 
+
 db_config = {
     'host': 'localhost',
     'user': 'root',
@@ -11,9 +12,7 @@ db_config = {
 def connect_db():
     return mysql.connector.connect(**db_config)
 
-conn = connect_db()
-cursor = conn.cursor()
-
+# Hash user password
 user = {
     'firstname': 'Ed Rhovic',
     'middlename': 'Banaag',
@@ -25,17 +24,12 @@ user = {
     'username': 'edrhovic',
     'password': '041405EdRhovic'
 }
-
 hashed_password = generate_password_hash(user['password'])
 
-check_query = """
-    SELECT COUNT(*) FROM my_tb 
-    WHERE username = %s OR email = %s
-"""
-cursor.execute(check_query, (user['username'], user['email']))
-duplicate_count = cursor.fetchone()[0]
-
+# Insert user data
 try:
+    conn = connect_db()
+    cursor = conn.cursor()
     query = """
         INSERT INTO my_tb (firstname, middlename, lastname, birthday, age, contact, email, username, password)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -53,13 +47,26 @@ try:
     )
     cursor.execute(query, values)
     conn.commit()
+    print("User successfully registered!")
 except mysql.connector.Error as e:
-    print('')
+    print(f"Database error occurred: {e}")
+finally:
+    cursor.close()
+    conn.close()
 
-
-input_password = "041405EdRhovic"
-is_valid = check_password_hash(hashed_password, input_password)
-
-
-cursor.close()
-conn.close()
+# Authenticate user
+try:
+    conn = connect_db()
+    cursor = conn.cursor()
+    input_password = "041405EdRhovic"
+    cursor.execute("SELECT * FROM my_tb WHERE username=%s", (user['username'],))
+    usr = cursor.fetchone()
+    if usr and check_password_hash(usr[9], input_password): 
+        print("Login successful: User and password match.")
+    else:
+        print("Login failed: User and password do not match.")
+except mysql.connector.Error as e:
+    print(f"Database error occurred: {e}")
+finally:
+    cursor.close()
+    conn.close()

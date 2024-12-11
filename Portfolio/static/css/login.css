@@ -110,6 +110,7 @@ body {
 }
 
 .delete-message {
+    text-align: center;
     color: rgb(170, 46, 46);
     font-size: 1.3em;
 }

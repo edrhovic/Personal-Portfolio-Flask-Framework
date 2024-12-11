@@ -132,6 +132,8 @@ def delete_profile():
         usr = cursor.fetchone()
 
         if usr and check_password_hash(hashed_password, password):
+
+            cursor.execute("DELETE FROM my_tb WHERE username=%s", (username,))
             conn.commit()
             session.clear()
             flash('Your profile has been deleted successfully!', 'success')

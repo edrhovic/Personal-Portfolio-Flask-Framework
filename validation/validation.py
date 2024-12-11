@@ -121,7 +121,7 @@ def validate_user_data(firstname, middlename, lastname, contact, email, birthday
     
     # Validate email
     if not is_valid_email(email):
-        errors.append("The email address is invalid. Please provide a valid email.")
+        errors.append("The email address is invalid. Please provide a valid email (e.g., Gmail, Yahoo, etc.).")
 
     # Validate birthday and age
     is_birthday_valid, birthday_error = is_valid_birthday_and_age(birthday, age)

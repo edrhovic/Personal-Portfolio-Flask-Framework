@@ -65,8 +65,8 @@ def create():
             response = make_response(redirect(url_for('crud.read')))
             return make_header(response)
 
-        response = make_response(render_template('users.html'))
-        return make_header(response)
+    response = make_response(render_template('users.html'))
+    return make_header(response)
 
 @crud.route('/read')
 def read():
@@ -150,7 +150,8 @@ def update(id):
             flash("User not found", category='error')
             return redirect(url_for('crud.read'))
 
-    return redirect(url_for('auth.login'))
+    response = make_response(redirect(url_for('auth.login')))
+    return make_header(response)
 
 @crud.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
@@ -162,4 +163,5 @@ def delete(id):
         cursor.close()
         conn.close()
         flash("Account deleted successfully!", category='success')
-        return redirect(url_for('crud.read'))
+        response = make_response(redirect(url_for('crud.read')))
+        return make_header(response)

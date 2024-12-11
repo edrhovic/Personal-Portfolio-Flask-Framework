@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="form-container">
+        <form action="{{ url_for('auth.login') }}" method="POST">
+            <div class="text">Login</div>
+
+            <div class="input-group">
+                <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" class="icon">
+                <input type="text" name="username" id="username" placeholder="Enter your username">
+            </div>
+            
+            <div class="input-group">
+                <img src="{{ url_for('static', filename='images/lock-icon.png') }}" alt="Lock Icon" class="icon">
+                <input type="password" name="password" id="password" placeholder="Enter your password">
+                <img src="{{ url_for('static', filename='images/eye-on.png') }}" alt="Toggle Password" class="toggle-password" onclick="togglePassword()">
+            </div>
+
+            <button type="submit">Login</button>
+
+            <div class="errorMessages">
+                {% if errorMessage %}
+                    <p>{{ errorMessage }}</p>
+                {% endif %}
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="delete-message">
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ category | capitalize }}: {{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js')}}">
+    </script>
+</body>
+</html>

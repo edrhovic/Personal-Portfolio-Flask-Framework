@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/dashboard.css')}}">
+    <script src="{{url_for('static', filename='/js/dashboard.js')}}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main-container">
+            <div class="image-container">
+                <img src="{{url_for('static', filename='images/me.png')}}" class="profile-image" alt="Profile Picture">
+            </div>
+            <div class="greetings">
+                <h1 class="welcome-text">Hi, I'm <span class='fname', style="text-shadow: 4px 4px 20px rgb(0, 0, 0);">{{ session['firstname'] }}</span></h1>
+                <h2 class="profession">Aspiring <span></span></h2>
+                <p>I'm an aspiring full-stack web developer eager to learn and gain experience in building websites and applications. I'm passionate about exploring both design and backend development to bring ideas to life.</p>
+            </div>
+        </div>
+    
+        <div class="about-myself-container hidden" id="about">
+            <h1>About Me</h1>
+            <p class="intro-text">
+                My name is Ed Rhovic Banaag Esmas, currently 2nd year college student at Laguna University taking Bachelor of Science in Information Technology Major in System Development. I am an aspiring full-stack web developer passionate about creating innovative, user-friendly web applications. With a foundation in programming, database management, and a little bit of responsive design, I enjoy turning ideas into fully functional websites. My personal portfolio showcases projects that highlight my skills in Flask, Python, MySQL integration, and modern web technologies.
+            </p>
+        </div>
+    </div>
+</body> 
+</html>
+{% endblock %}

@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #f9f4f5;
+    font-family: monospace;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background-color: #2e2e2e;
+    color: #f9f4f5;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    max-width: 85em;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    border-radius: 1rem;
+    animation-delay: 1s;
+    animation: slide-in 3s ease-out;
+    font-size: 1rem;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.image-container img {
+    width: 25rem;
+    height: 25rem;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 1.2rem 0px rgba(0, 0, 0, 0.75);
+    animation: bounce-in 1s ease-out, float 3s ease-in-out infinite;
+    border: 5px solid #aa92c7;
+}
+
+.about-myself-container {
+    max-width: 85rem;
+    padding: 2rem;
+    background-color: #3d3043;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 0.625rem rgba(0, 0, 0, 0.2);
+    margin: 2rem;
+    animation: fade-in 1.5s ease-in-out;
+    line-height: 1.8;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    border: 2px solid #aa92c7;
+    font-family: 'Roboto', sans-serif;
+}
+
+.about-myself-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    text-shadow: 0px 0.2rem 0.5rem rgba(0, 0, 0, 0.6);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.about-myself-container h1:hover {
+    color: #aa92c7;
+    transform: scale(1.05);
+}
+
+.about-myself-container p {
+    margin: 1rem 0;
+    color: #d1d5db;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    animation: text-slide 1.5s ease-in-out;
+    text-align: justify;
+    letter-spacing: 1px;
+    word-wrap: break-word;
+    transition: all 0.3s ease-in-out;
+}
+
+.about-myself-container p:hover {
+    color: #f9f4f5;
+    text-decoration: underline;
+}
+
+.welcome-text span {
+    color: #aa92c7;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+
+.greetings {
+    line-height: 4rem;
+}
+
+.greetings h1, .greetings .fname {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #aa92c7;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #b081ea, #ffffff);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.greetings h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #d1d5db;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.profession span {
+    color: #aa92c7;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.greetings p {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(3.125rem);
+    transition: none;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: slide-fade-in 3s ease-out;
+}
+
+.modal-footer {
+    background-color: #25222e;
+}
+
+@keyframes slide-fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(20.125rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(20.125rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes text-slide {
+    from {
+        transform: translateX(-1.25rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-0.9375rem);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .image-container img {
+        width: 22rem;
+        height: 22rem;
+    }
+
+    .about-myself-container {
+        padding: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    .about-myself-container h1 {
+        font-size: 2.4rem;
+    }
+
+    .about-myself-container p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        font-size: 1.25rem;
+    }
+
+    .image-container img {
+        width: 18.75rem;
+        height: 18.75rem;
+    }
+
+    .about-myself-container {
+        padding: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .about-myself-container h1 {
+        font-size: 2.2rem;
+    }
+
+    .about-myself-container p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .image-container img {
+        width: 15.625rem;
+        height: 15.625rem;
+    }
+
+    .about-myself-container {
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .about-myself-container h1 {
+        font-size: 2rem;
+    }
+
+    .about-myself-container p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 0.5rem;
+        gap: 1rem;
+        font-size: 1rem;
+    }
+
+    .image-container img {
+        width: 12.5rem;
+        height: 12.5rem;
+    }
+
+    .about-myself-container {
+        padding: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .about-myself-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .about-myself-container p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .main-container {
+        padding: 0.25rem;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .image-container img {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .about-myself-container {
+        padding: 0.25rem;
+        font-size: 1rem;
+    }
+
+    .about-myself-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .about-myself-container p {
+        font-size: 0.9rem;
+    }
+}

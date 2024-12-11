@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="nav-bar" id="nav-bar">
+        <div id="hamburger" class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div id="logo">ED</div>
+        <ul id="menu" class="menu">
+            <li><a href="{{ url_for('blueprint.dashboard') }}">Home</a></li>
+            <li><a href="{{ url_for('blueprint.blog') }}">Blog</a></li>
+            <li><a href="{{ url_for('blueprint.update_profile') }}">My Profile</a></li>
+            <li><a href="{{ url_for('crud.read') }}">Several Users</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a></li>
+        </ul>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer" style="background-color: #25222e;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+</body>
+</html>

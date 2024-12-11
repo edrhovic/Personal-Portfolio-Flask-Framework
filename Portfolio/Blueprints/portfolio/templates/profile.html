@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profiles.css') }}">
+    <link href="{{ url_for('static', filename='css/animate.min.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container1 container mt-5 fadeIn">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages mt-4">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                            <strong>{{ category | capitalize }}: </strong>{{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+            <div class="mb-4 containerz col row-cols-1 row-cols-md-2">
+                <div class="col-md-4 col-12 text-center column1 animate__animated animate__slideInLeft">
+                    <div class="column1-content">
+                        <div class="my_profile">
+                        <img src="{{ url_for('static', filename='images/me.png') }}" alt="Profile Picture" class="rounded-circle profile-img mb-3" width="150" height="150">
+                        <h2>{{ usr[1] }} {{ usr[2] }} {{ usr[3] }}</h2>
+                        <h5>BSIT Student at Laguna University</h5>
+                        <h5>Block 18 Lot 35, DonBosco Site 2, Dayap, Calauan, Laguna</h5>
+                        </div>
+                        
+                        
+                        <div class="contact">
+                            <div><h3>Contact me here:</h3></div>
+                            <div class="social-media-accounts">
+                                
+                                <div class="icons">
+                                    <img src="{{ url_for('static', filename='images/fb-icon.png') }}" alt="fb-icon" width="25px"><a href="https://www.facebook.com/edrhovicesmas">Facebook</a>
+                                </div>
+
+                                <div class="icons">
+                                    <img src="{{ url_for('static', filename='images/github.png') }}" alt="fb-icon" width="25px"><a href="https://github.com/edrhovic">GitHub</a>
+                                </div>
+
+                                <div class="icons">
+                                    <img src="{{ url_for('static', filename='images/ig-icon.png') }}" alt="fb-icon" width="25px"><a href="https://www.instagram.com/edlvswi/?igsh=MW12MTk0dndidnhwMA%3D%3D">Instagram</a>
+                                </div>
+
+                                <div class="icons">
+                                    <img src="{{ url_for('static', filename='images/linkedin-icon.png') }}" alt="fb-icon" width="25px"><a href="https://www.linkedin.com/in/ed-rhovic-esmas-3393b8333/">LinkedIn</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profiles col-md-6 col-12 animate__animated animate__slideInRight">
+                    <h2>Profile Details</h2>
+                    <div class="list-group">
+                        <p class="list-group-item"><strong>First Name:</strong> {{ usr[1] }}</p>
+                        <p class="list-group-item"><strong>Middle Name:</strong> {{ usr[2] }}</p>
+                        <p class="list-group-item"><strong>Last Name:</strong> {{ usr[3] }}</p>
+                        <p class="list-group-item"><strong>Birthday:</strong> {{ usr[4] }}</p>
+                        <p class="list-group-item"><strong>Age:</strong> {{ usr[5] }}</p>
+                        <p class="list-group-item"><strong>Contact Number:</strong> {{ usr[6] }}</p>
+                        <p class="list-group-item"><strong>Email:</strong> {{ usr[7] }}</p>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+                        <button type="button" class="btn btn-danger btn-lg ms-2" data-bs-toggle="modal" data-bs-target="#deleteProfileModal">Delete Profile</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="POST" action="{{ url_for('blueprint.update_profile') }}">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstname" name="firstname" value="{{ usr[1] }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="middleName" class="form-label">Middle Name</label>
+                                    <input type="text" class="form-control" id="middlename" name="middlename" value="{{ usr[2] }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{ usr[3] }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="birthday" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="birthday" name="birthday" value="{{ usr[4] }}" min="1964-01-01" max="2024-12-31">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Age</label>
+                                    <input type="number" class="form-control" id="age" name="age" value="{{ usr[5] }}" max="60">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactNum" class="form-label">Contact Number</label>
+                                    <input type="text" class="form-control" id="contact" name="contact" value="{{ usr[6] }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ usr[7] }}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteProfileModalLabel">Confirm Profile Deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ url_for('blueprint.delete_profile') }}" method="POST">
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Enter Password to Confirm</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-danger" value="Confirm Deletion">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+{% endblock %}

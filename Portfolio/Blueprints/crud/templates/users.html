@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Several Users{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+    <link href="{{ url_for('static', filename='css/animate.min.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="content-container">
+        <div class="container mt-5">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages mt-4">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{
+                            'danger' if category == 'error' else 
+                            'info' if category == 'info' else 
+                            'success'
+                        }} alert-dismissible fade show" role="alert">
+                            <strong>{{ category | capitalize }}:</strong> {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+
+            <h1 class="text-center ">Several Users</h1>
+            <button type="button" class="btn btn-success btn-lg " data-bs-toggle="modal" data-bs-target="#createProfileModal">Create New User</button>
+
+            <table class="table table-hover mt-4">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Birthday</th>
+                        <th>Age</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in datas %}
+                    <tr>
+                        <td>{{ data[1] }}</td>
+                        <td>{{ data[2] }}</td>
+                        <td>{{ data[3] }}</td>
+                        <td>{{ data[4] }}</td>
+                        <td>{{ data[5] }}</td>
+                        <td>{{ data[6] }}</td>
+                        <td>{{ data[7] }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal-{{ data[0] }}">Update</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProfileModal-{{ data[0] }}">Delete</button>
+                        </td>
+                    </tr>
+
+                    <div class="modal fade " id="editProfileModal-{{ data[0] }}" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Update Profile</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{ url_for('crud.update', id=data[0]) }}">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" name="firstname" value="{{ data[1] }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="middlename" class="form-label">Middle Name</label>
+                                            <input type="text" class="form-control" name="middlename" value="{{ data[2] }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" name="lastname" value="{{ data[3] }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="birthday" class="form-label">Birthday</label>
+                                            <input type="date" class="form-control" name="birthday" value="{{ data[4] }}" min="1964-01-01" max="2024-12-31">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="age" class="form-label">Age</label>
+                                            <input type="number" class="form-control" name="age" value="{{ data[5] }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="contact" class="form-label">Contact</label>
+                                            <input type="text" class="form-control" name="contact" value="{{ data[6] }}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email" value="{{ data[7] }}">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-primary" value="Save Changes">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delete Profile Modal -->
+                    <div class="modal fade " id="deleteProfileModal-{{ data[0] }}" tabindex="-1" aria-labelledby="deleteProfileModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Profile</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{ url_for('crud.delete', id=data[0]) }}">
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete this user?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade " id="createProfileModal" tabindex="-1" aria-labelledby="createProfileModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createProfileModalLabel">Create New User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ url_for('crud.create') }}">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="firstname" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="middlename" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" name="middlename">
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="lastname" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="birthday" class="form-label">Birthday</label>
+                                <input type="date" class="form-control" name="birthday" min="1964-01-01" max="2024-12-31">
+                            </div>
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" name="age">
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact" class="form-label">Contact</label>
+                                <input type="text" class="form-control" name="contact">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" value="Create Profile">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+{% endblock %}

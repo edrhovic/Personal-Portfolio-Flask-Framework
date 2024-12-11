@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    background: linear-gradient(135deg, rgba(41,16,51,1) 0%, rgba(8,3,20,1) 100%), 
+    radial-gradient(circle, rgba(255, 0, 128, 0.3) 0%, rgba(0, 0, 0, 0.8) 70%);
+    background-size: cover, 100%;
+    background-position: center, center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #f1f1f1;
+}
+
+.main-container {
+    display: flex;
+    align-self: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem;
+    border-radius: 1rem;
+    width: 100%;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInContainer 1s forwards 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.box-container {
+    width: 100%;
+    min-width: 20rem;
+    height: 24rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #3d3043;
+    box-shadow: 0 0.25rem 1.25rem rgba(195, 195, 195, 0.2);
+    color: white;
+    opacity: 0;
+    animation: slideIn 1.5s forwards;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-top: 4px solid rgba(138, 58, 212, 0.373);
+}
+
+.box-container img {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+}
+
+.box-container h3 {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    font-weight: bold;
+    color: #aa92c7;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.05rem;
+    opacity: 0;
+    animation: fadeInText 1.5s forwards 0.5s;
+    transition: transform 0.2s ease-in-out, color 0.3s ease-in-out;
+}
+
+.box-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.5rem 4.25rem rgba(255, 249, 249, 0.25);
+    transform: scale(1.05);
+}
+
+.box-container:hover h3 {
+    color: #ff80d5;
+    transform: translateY(-5px);
+}
+
+.animated-title {
+    color: #f7a2f7;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    animation: fadeInTitle 2.5s ease-in-out;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.1rem;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInContainer {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1440px) {
+    .box-container {
+        width: 48%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .box-container {
+        width: 48%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .box-container {
+        width: 48%;
+    }
+}
+
+@media (max-width: 768px) {
+    .box-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .box-container {
+        width: 100%;
+        padding: 1rem;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .box-container {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 375px) {
+    .box-container {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.modal-dialog {
+    max-width: 90%;
+}
+
+.modal-dialog.modal-xl {
+    max-width: 90%;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+}
+
+.modal-footer{
+    background-color: #241d25;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .modal-dialog {
+        max-width: 95%;
+    }
+
+    .modal-body img {
+        max-width: 100%;
+    }
+}
+
+@keyframes titleAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.title-animation {
+    animation: titleAnimation 2.5s ease-in-out;
+}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/blog.css')}}">
+    <script src="{{url_for('static', filename='/js/script.js')}}" defer></script>
+    <link href="{{url_for('static', filename='/css/bootstrap.min.css')}}" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5 title-animation" style="color: white;">All Activities in Object-Oriented Programming</h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-4 g-5 align-items-center justify-content-center">
+            <div class="col">
+                <div class="box-container" style="animation-delay: 0s;">
+                    <img src="{{url_for('static', filename='images/act1.png')}}" class="img-fluid" alt="Activity 1" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act1.png')}}" data-bs-title="Activity 1">
+                    <br><h5>Activity 1</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 0.2s;">
+                    <img src="{{url_for('static', filename='images/act2.png')}}" class="img-fluid" alt="Activity 2" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act2.png')}}" data-bs-title="Activity 2">
+                    <br><h5>Activity 2</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 0.4s;">
+                    <img src="{{url_for('static', filename='images/act3.png')}}" class="img-fluid" alt="Activity 3" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act3.png')}}" data-bs-title="Activity 3">
+                    <br><h5>Activity 3</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 0.6s;">
+                    <img src="{{url_for('static', filename='images/act4.png')}}" class="img-fluid" alt="Activity 4" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act4.png')}}" data-bs-title="Activity 4">
+                    <br><h5>Activity 4</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 0.8s;">
+                    <img src="{{url_for('static', filename='images/act5.png')}}" class="img-fluid" alt="Activity 5" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act5.png')}}" data-bs-title="Activity 5">
+                    <br><h5>Activity 5</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 1s;">
+                    <img src="{{url_for('static', filename='images/act6.png')}}" class="img-fluid" alt="Activity 6" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act6.png')}}" data-bs-title="Activity 6">
+                    <br><h5>Activity 6</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 1.2s;">
+                    <img src="{{url_for('static', filename='images/act7.png')}}" class="img-fluid" alt="Activity 7" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act7.png')}}" data-bs-title="Activity 7">
+                    <br><h5>Activity 7</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 1.4s;">
+                    <img src="{{url_for('static', filename='images/act8.png')}}" class="img-fluid" alt="Activity 8" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/act8.png')}}" data-bs-title="Activity 8">
+                    <br><h5>Activity 8</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="box-container" style="animation-delay: 1.6s;">
+                    <img src="{{url_for('static', filename='images/voucher.png')}}" class="img-fluid" alt="Activity 9" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img="{{url_for('static', filename='images/voucher.png')}}" data-bs-title="Activity 9">
+                    <br><h5>Activity 9</h5>
+                    <h6>To view this activity, just click the image</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 80vw; min-height: 70vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center" style="overflow: hidden; height: 90%;">
+                    <img id="modalImage" src="" alt="Full-size image" class="img-fluid" style="max-width: 90%; max-height: 90%;">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="{{url_for('static', filename='/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/blog.js')}}"></script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(41,16,51,1) 0%, rgba(8,3,20,1) 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container form {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 6em;
+    border: none;
+    box-shadow: 0 0 15px 2px rgba(248, 248, 248, 0.274);
+    border-radius: 1em;
+    width: 100%;
+    max-width: 600px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.5em 3.5em;
+    font-size: 1.5em;
+    background-color: rgba(228, 227, 228, 0.911);
+    border: none;
+    border-radius: 1em;
+    box-shadow: 0 0 15px 2px rgba(129, 129, 129, 0.5);
+}
+
+.input-group .icon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.input-group img.toggle-password {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.form-container button {
+    background-color: rgba(228, 227, 228, 0.911);
+    font-size: 1.5em;
+    margin: 1.2em 0;
+    padding: 0.5em 3.5em;
+    width: 100%;
+    box-shadow: 0 0 15px 2px rgba(129, 129, 129, 0.5);
+    border: none;
+    border-radius: 1em;
+    transition: 0.5s;
+}
+
+.form-container input:focus {
+    box-shadow: 0 0 20px 5px rgba(61, 88, 61, 0.5);
+}
+
+.form-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 5px rgba(77, 38, 102, 0.5);
+}
+
+.text {
+    font-size: 3em;
+    color: rgb(255, 255, 255);
+    margin-bottom: 1em;
+    animation: slideIn 1s ease-in-out;
+}
+
+.errorMessages {
+    color: rgb(170, 46, 46);
+    font-size: 1.3em;
+}
+
+.delete-message {
+    color: rgb(170, 46, 46);
+    font-size: 1.3em;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+    .form-container form {
+        padding: 3.5em 5em;
+    }
+
+    .input-group input {
+        font-size: 1.4em;
+    }
+
+    .form-container button {
+        font-size: 1.4em;
+    }
+
+    .text {
+        font-size: 2.7em;
+    }
+
+    .icon {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .form-container form {
+        padding: 3em 4em;
+    }
+
+    .input-group input {
+        font-size: 1.4em;
+    }
+
+    .form-container button {
+        font-size: 1.3em;
+    }
+
+    .text {
+        font-size: 2.5em;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container form {
+        padding: 2em 3em;
+    }
+
+    .input-group input {
+        font-size: 1.2em;
+    }
+
+    .form-container button {
+        font-size: 1.2em;
+    }
+
+    .text {
+        font-size: 2em;
+    }
+
+    .icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container form {
+        padding: 1.5em 2em;
+    }
+
+    .input-group input {
+        font-size: 1.1em;
+    }
+
+    .form-container button {
+        font-size: 1em;
+    }
+
+    .text {
+        font-size: 1.5em;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    .form-container form {
+        padding: 1em 1.5em;
+    }
+
+    .input-group input {
+        font-size: 1em;
+    }
+
+    .form-container button {
+        font-size: 0.9em;
+    }
+
+    .text {
+        font-size: 1.3em;
+    }
+
+    .icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .form-container form {
+        padding: 0.8em 1.2em;
+    }
+
+    .input-group input {
+        font-size: 0.9em;
+    }
+
+    .form-container button {
+        font-size: 0.8em;
+    }
+
+    .text {
+        font-size: 1.2em;
+    }
+
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+}

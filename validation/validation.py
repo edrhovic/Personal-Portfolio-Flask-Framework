@@ -88,26 +88,27 @@ def validate_user_data(firstname, middlename, lastname, contact, email, birthday
             if len(name) < 2 or len(name) > 20:
                 errors.append(f"{field} must be between 2 and 20 characters long.")
 
-            if not is_valid_name(name):
+            elif not is_valid_name(name):
                 errors.append(f"{field} must contain only letters and spaces, and be at least 2 characters long.")
 
-            if re.search(multiple_words_regex, name.strip()):
+            elif re.search(multiple_words_regex, name.strip()):
                 errors.append(f"{field} must not have multiple words that are the same.")
 
-            if re.search(r'(\w)\1{3,}', name.strip()):
+            elif re.search(r'(\w)\1{3,}', name.strip()):
                 errors.append(f"{field} must not have excessive character repetition.")
 
-            if any(len(word) < 2 for word in name.split()):
+            elif any(len(word) < 2 for word in name.split()):
                 errors.append(f"{field} must not contain words with fewer than 2 letters, unless they are common abbreviations or initials.")
 
-            if len(name.split()) == 1 and len(name) > 12:
-                errors.append(f"{field} must not consist of a single unstructured word.")
+            elif len(name.split()) == 1 and len(name) > 12:
+                errors.append(f"{field} must consist of a single structured word.")
 
-            if any(len(word) > 10 for word in name.split()):
-                errors.append(f"{field} must not contain a word longer than 10 characters.")
+            elif any(len(word) > 12 for word in name.split()):
+                errors.append(f"{field} must not contain a word longer than 12 characters.")
 
-            if '  ' in name:
+            elif '  ' in name:
                 errors.append(f"{field} must not contain multiple spaces between words.")
+
     
     # Validate contact
     if not is_valid_contact(contact):

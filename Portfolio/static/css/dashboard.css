@@ -107,8 +107,9 @@ body {
     text-transform: uppercase;
     color: #aa92c7;
     letter-spacing: 2px;
-    background: linear-gradient(to right, #b081ea, #ffffff);
+    background: linear-gradient(to right, #dba2d3, #ffffff);
     -webkit-background-clip: text;
+    text-shadow: 1px 4px 0px rgba(0,0,0,0.6);
     color: transparent;
     font-family: 'Montserrat', sans-serif;
 }

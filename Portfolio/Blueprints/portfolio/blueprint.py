@@ -62,7 +62,7 @@ def update_profile():
             birthday = request.form.get('birthday').strip()
             age = request.form.get('age').strip()
             contact = request.form.get('contact').strip()
-            email = request.form.get('email').strip()
+            email = request.form.get('email').strip().lower()
 
             errors = validate_user_data(firstname, middlename, lastname, contact, email, birthday, age)
 

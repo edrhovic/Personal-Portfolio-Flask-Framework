@@ -78,8 +78,10 @@ def validate_user_data(firstname, middlename, lastname, contact, email, birthday
 
     # Capitalize the names before validation, leave middlename empty if not provided
     firstname = firstname.strip().title()
-    middlename = middlename.strip().title() if middlename else ""  # Allow empty middlename
+    middlename = middlename.strip().title() if middlename else "" 
     lastname = lastname.strip().title()
+    
+    
 
     # Validate name fields (only validate if the name is provided)
     for name, field in zip([firstname, middlename, lastname], ['First name', 'Middle name', 'Last name']):
@@ -109,21 +111,25 @@ def validate_user_data(firstname, middlename, lastname, contact, email, birthday
             elif '  ' in name:
                 errors.append(f"{field} must not contain multiple spaces between words.")
 
+    #Contact number validation 
+    contact = contact.strip() if contact else ""
+    if contact:
+        if not is_valid_contact(contact):
+            if len(contact) != 11:
+                errors.append("The contact number must be exactly 11 digits, with no symbols or spaces.")
+            elif not contact.startswith("09"):
+                errors.append("The contact number must start with 09, e.g. (09XXXXXXXXX).")
+            elif re.search(r'(\d)\1{4}', contact):
+                errors.append("The contact number must not contain 5 or more consecutive repeating digits.")
     
-    # Validate contact
-    if not is_valid_contact(contact):
-        if len(contact) != 11:
-            errors.append("The contact number must be exactly 11 digits, with no symbols or spaces.")
-        elif not contact.startswith("09"):
-            errors.append("The contact number must start with 09, e.g. (09XXXXXXXXX).")
-        elif re.search(r'(\d)\1{4}', contact):
-            errors.append("The contact number must not contain 5 or more consecutive repeating digits.")
-    
-    # Validate email
-    if not is_valid_email(email):
-        errors.append("The email address is invalid. Please provide a valid email (e.g., Gmail, Yahoo, etc.).")
 
-    # Validate birthday and age
+    #Email Validation
+    email = email.strip() if email else ""
+    if email:
+        if not is_valid_email(email):
+            errors.append("The email address is invalid. Please provide a valid email (e.g., Gmail, Yahoo, etc.).")
+
+    #Birthday and age validation
     is_birthday_valid, birthday_error = is_valid_birthday_and_age(birthday, age)
     if not is_birthday_valid:
         errors.append(birthday_error)

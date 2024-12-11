@@ -32,7 +32,7 @@ def create():
             birthday = request.form.get('birthday').strip()
             age = request.form.get('age').strip()
             contact = request.form.get('contact').strip()
-            email = request.form.get('email').strip()
+            email = request.form.get('email').strip().lower()
 
             errors = validate_user_data(firstname, middlename, lastname, contact, email, birthday, age)
 
@@ -94,7 +94,7 @@ def update(id):
             birthday = request.form.get('birthday').strip()
             age = request.form.get('age').strip()
             contact = request.form.get('contact').strip()
-            email = request.form.get('email').strip()
+            email = request.form.get('email').strip().lower()
 
             # Use the validation function
             errors = validate_user_data(firstname, middlename, lastname, contact, email, birthday, age)
@@ -122,15 +122,26 @@ def update(id):
                     conn.close()
                     return redirect(url_for('crud.read'))
 
-                if (usr[1].strip() != firstname.strip() or usr[2].strip() != middlename.strip() or usr[3].strip() != lastname.strip() or 
-                    usr[4] != birthday or usr[5] != age or usr[6].strip() != contact.strip() or usr[7].strip() != email.strip()):
+                if (usr[1].strip() != firstname.strip() or 
+                    usr[2].strip() != middlename.strip() or 
+                    usr[3].strip() != lastname.strip() or 
+                    usr[4] != birthday or 
+                    usr[5] != age or 
+                    usr[6].strip() != contact.strip() or 
+                    usr[7].strip() != email.strip()):
                     
-                    cursor.execute("UPDATE crud_tb SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contact=%s, email=%s WHERE id=%s", 
-                                (firstname, middlename, lastname, birthday, age, contact, email, id))
+                    # Update query
+                    cursor.execute("""
+                        UPDATE crud_tb 
+                        SET firstname=%s, middlename=%s, lastname=%s, birthday=%s, age=%s, contact=%s, email=%s 
+                        WHERE id=%s
+                    """, (firstname, middlename, lastname, birthday, age, contact, email, id))
                     conn.commit()
                     flash("Account updated successfully", category='success')
                 else:
-                    flash("No changes were made", category='info') 
+                    # All fields match; no changes
+                    flash("No changes were made", category='info')
+
 
 
             cursor.close()

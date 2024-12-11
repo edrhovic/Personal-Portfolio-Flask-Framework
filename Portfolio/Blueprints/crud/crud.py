@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session, request, flash, make_response
 import mysql.connector
-from portfolio.validation.validation import validate_user_data
+from validation.validation import validate_user_data
 
 crud = Blueprint('crud', __name__, template_folder='templates')
 

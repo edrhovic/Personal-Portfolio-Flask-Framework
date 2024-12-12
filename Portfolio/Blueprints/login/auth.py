@@ -54,5 +54,6 @@ def login():
 @auth.route('/logout')
 def logout():
     session.clear()
+    flash("You have been logged out.", category='success')
     response = make_response(redirect(url_for('auth.login')))
     return make_header(response)
